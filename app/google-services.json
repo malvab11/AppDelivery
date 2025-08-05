@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834370476687",
+    "project_id": "appdelivery---smashboyburguer",
+    "storage_bucket": "appdelivery---smashboyburguer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834370476687:android:19a4663db0974016f66efa",
+        "android_client_info": {
+          "package_name": "com.example.appdelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD5jyRJ5twC5GsbTNq1NpbPfssIoQavWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
