@@ -15,12 +15,14 @@ import com.example.appdelivery.presentation.navigation.AppNavGraph
 import com.example.appdelivery.presentation.screens.login.LoginScreen
 import com.example.appdelivery.presentation.screens.login.LoginViewModel
 import com.example.appdelivery.presentation.screens.presentation.PresentationScreen
+import com.example.appdelivery.presentation.screens.register.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val loginViewModel: LoginViewModel by viewModels()
+        val registerViewModel: RegisterViewModel by viewModels()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -31,6 +33,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         padding = innerPadding,
                         loginViewModel = loginViewModel,
+                        registerViewModel = registerViewModel
                     )
                 }
             }

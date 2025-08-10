@@ -21,13 +21,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AlternateEmail
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -42,13 +37,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appdelivery.R
+import com.example.appdelivery.presentation.commons.components.CommonButton
+import com.example.appdelivery.presentation.commons.components.CommonOutlinedInput
 
 // Paleta de colores personalizados
 private val SmashRed = Color(0xFFFF0000)
@@ -185,35 +180,21 @@ private fun LoginContent(
         )
 
         // Campo de email
-        OutlinedTextField(
+        CommonOutlinedInput(
             value = email,
-            onValueChange = onEmailChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Correo Electrónico") },
-            shape = RoundedCornerShape(12.dp),
-            trailingIcon = { Icon(Icons.Default.AlternateEmail, contentDescription = null) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            singleLine = true
-        )
+            title = "Correo Electrónico",
+            icon = Icons.Default.AlternateEmail,
+            isPassword = false,
+            onValueChange = onEmailChange)
 
         // Campo de contraseña con icono de visibilidad
-        OutlinedTextField(
+        CommonOutlinedInput(
             value = password,
+            title = "Contraseña",
+            isPassword = true,
+            isHide = isHide,
             onValueChange = onPasswordChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Contraseña") },
-            shape = RoundedCornerShape(12.dp),
-            trailingIcon = {
-                IconButton(onClick = onVisibility) {
-                    Icon(
-                        imageVector = if (isHide) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                        contentDescription = if (isHide) "Mostrar contraseña" else "Ocultar contraseña"
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            visualTransformation = if (isHide) PasswordVisualTransformation() else VisualTransformation.None,
-            singleLine = true
+            onIconPressed = onVisibility
         )
 
         // Opción para recuperar contraseña
@@ -227,22 +208,12 @@ private fun LoginContent(
         )
 
         // Botón principal de login
-        Button(
-            onClick = onLoginPressed,
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = SmashRed,
-                contentColor = Color.White
-            ),
-            enabled = isEnabled
-        ) {
-            if (!isLoading) {
-                Text("Ingresar", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-            } else {
-                CircularProgressIndicator(color = Color.White)
-            }
-        }
+        CommonButton(
+            title = "Ingresar",
+            isEnabled = isEnabled,
+            isLoading = isLoading,
+            onClick = onLoginPressed
+        )
 
         // Botón de Google
         GoogleSignInButton(

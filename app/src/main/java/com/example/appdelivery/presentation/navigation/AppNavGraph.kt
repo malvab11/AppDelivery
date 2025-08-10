@@ -5,10 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.appdelivery.presentation.screens.choose.ChooseScreen
 import com.example.appdelivery.presentation.screens.login.LoginScreen
 import com.example.appdelivery.presentation.screens.login.LoginViewModel
 import com.example.appdelivery.presentation.screens.presentation.PresentationScreen
 import com.example.appdelivery.presentation.screens.register.RegisterScreen
+import com.example.appdelivery.presentation.screens.register.RegisterViewModel
 
 /**
  * Define el grafo de navegación principal de la aplicación.
@@ -30,10 +32,15 @@ import com.example.appdelivery.presentation.screens.register.RegisterScreen
  * ```
  */
 @Composable
-fun AppNavGraph(navController: NavHostController, padding: PaddingValues, loginViewModel: LoginViewModel) {
+fun AppNavGraph(
+    navController: NavHostController,
+    padding: PaddingValues,
+    loginViewModel: LoginViewModel,
+    registerViewModel: RegisterViewModel
+) {
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Login
+        startDestination = NavRoutes.Presentation
     ) {
         composable(NavRoutes.Presentation) {
             PresentationScreen(
@@ -41,10 +48,21 @@ fun AppNavGraph(navController: NavHostController, padding: PaddingValues, loginV
             ) { navController.navigate(NavRoutes.Login) }
         }
         composable(NavRoutes.Login) {
-            LoginScreen(padding = padding, viewModel = loginViewModel) { navController.navigate(NavRoutes.Register) }
+            LoginScreen(
+                padding = padding,
+                viewModel = loginViewModel,
+                onRegisterPressed = {navController.navigate(NavRoutes.Register)}
+            )
         }
         composable(NavRoutes.Register) {
-            RegisterScreen(padding = padding)
+            RegisterScreen(
+                viewModel = registerViewModel,
+                onBackPressed = { navController.popBackStack() },
+                onRegisterPressed = { navController.navigate(NavRoutes.ChooseScreen) }
+            )
+        }
+        composable(NavRoutes.ChooseScreen) {
+            ChooseScreen()
         }
     }
 }
