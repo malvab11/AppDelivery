@@ -1,5 +1,6 @@
 package com.example.appdelivery.presentation.screens.presentation
 
+import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -99,7 +100,7 @@ fun PresentationScreen(
             item = items[currentIndex],
             size = items.size,
             currentIndex = currentIndex
-        ) {onNavigationClick}
+        ) {onNavigationClick()}
     }
 }
 
@@ -111,8 +112,7 @@ private fun PresentationImage(modifier: Modifier = Modifier, imageRes: Presentat
     Box(
         modifier = modifier
             .fillMaxSize()
-            .clip(shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
-            .background(Color.Cyan),
+            .clip(shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)),
         contentAlignment = Alignment.Center
     ) {
         Image(

@@ -82,6 +82,10 @@ dependencies {
     //LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
+    //Material Icons
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material:material-icons-extended")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

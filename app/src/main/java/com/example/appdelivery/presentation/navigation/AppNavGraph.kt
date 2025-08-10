@@ -6,7 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.appdelivery.presentation.screens.login.LoginScreen
+import com.example.appdelivery.presentation.screens.login.LoginViewModel
 import com.example.appdelivery.presentation.screens.presentation.PresentationScreen
+import com.example.appdelivery.presentation.screens.register.RegisterScreen
 
 /**
  * Define el grafo de navegación principal de la aplicación.
@@ -28,19 +30,21 @@ import com.example.appdelivery.presentation.screens.presentation.PresentationScr
  * ```
  */
 @Composable
-fun AppNavGraph(navController: NavHostController, padding: PaddingValues) {
+fun AppNavGraph(navController: NavHostController, padding: PaddingValues, loginViewModel: LoginViewModel) {
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Presentation
+        startDestination = NavRoutes.Login
     ) {
         composable(NavRoutes.Presentation) {
             PresentationScreen(
                 padding = padding,
-                onNavigationClick = { navController.navigate(NavRoutes.Login) }
-            )
+            ) { navController.navigate(NavRoutes.Login) }
         }
         composable(NavRoutes.Login) {
-            LoginScreen(padding = padding)
+            LoginScreen(padding = padding, viewModel = loginViewModel) { navController.navigate(NavRoutes.Register) }
+        }
+        composable(NavRoutes.Register) {
+            RegisterScreen(padding = padding)
         }
     }
 }
