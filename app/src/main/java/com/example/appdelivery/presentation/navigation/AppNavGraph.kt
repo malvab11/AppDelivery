@@ -58,7 +58,10 @@ fun AppNavGraph(
             RegisterScreen(
                 viewModel = registerViewModel,
                 onBackPressed = { navController.popBackStack() },
-                onRegisterPressed = { navController.navigate(NavRoutes.ChooseScreen) }
+                navigateToChoose = { navController.navigate(NavRoutes.ChooseScreen){
+                    popUpTo(0) {inclusive = true}
+                    launchSingleTop = true
+                } }
             )
         }
         composable(NavRoutes.ChooseScreen) {
